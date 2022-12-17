@@ -7,6 +7,8 @@ public  class Product {
         System.out.println("Seu cona");
 
         System.out.println("Seu cona");
+        System.out.println("Seu cona");
+        
     }
     public Element(int count, T thing) {
         this.count = count;
