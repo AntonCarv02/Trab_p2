@@ -1,33 +1,39 @@
-import java.util.Date;
+import java.time.*;
 
 public class Perishable extends Product implements Freshness {
 
-    private Date limitDate;
+    private LocalDate limitDate;
 
-    public Perishable(int limitDate) {
+    
+    public Perishable(String name, double cost,int[] limitDate) {
+        super(name, cost);
         setLimitDate(limitDate);
     }
     
-    public Date getLimitDate() {
+
+    public LocalDate getLimitDate() {
         return limitDate;
     }
 
-    public void setLimitDate(int limitDate) {
-        Date lDate = new ();
+
+    public void setLimitDate(int [] limitDate) {
+
+        LocalDate lDate = LocalDate.of(limitDate[2], limitDate[1], limitDate[0]);
+        
         this.limitDate = lDate;
     }
 
 
     @Override
     public boolean isOutDated() {
-
-        return false;
+        return this.limitDate.isBefore(LocalDate.now());
+        
     }
 
     @Override
     public boolean isFromToday() {
-
-        return false;
+        return this.limitDate.isEqual(LocalDate.now());
+        
     }
 
     
