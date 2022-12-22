@@ -1,18 +1,22 @@
-import java.util.Date;
-import java.text.SimpleDateFormat;
+
 
 public class test {
     public static void main(String[] args) {
-        SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
+
+        ElementarMachine<String> sm1 = new ElementarMachine<String>();
         
         try {
-            
-            Date d1 = sdformat.parse("2022-12-13");
-            Perishable p1 = new Perishable("Fruit", 12, d1);
-            System.out.println(p1.isOutDated());
-        
+            ProductMachine pm = new ProductMachine();
+            pm.addProduct(10, new Perishable("Milk", 10, new Date()));
+            pm.addProduct(10, new Perishable("Milk", 10, new Date()));
+            pm.addProduct(5, new NonPerishable("Lotion", 12.5, 3.4));
+            pm.addProduct(5, new NonPerishable("Shampoo", 5.5, 3.4));
+            pm.addProduct(5, new NonPerishable("Game", 7.5, 4.6));
+            pm.listAllOrdered();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+        
     }
 }
