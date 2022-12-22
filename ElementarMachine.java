@@ -5,17 +5,18 @@ public class ElementarMachine<T> {
 
     private ArrayList<Element<T>> listaElements;
 
+
     public ElementarMachine() {
         listaElements = new ArrayList<Element<T>>();
     }
 
+
     public void addThings(int n, T coisa) {
-        
+
         boolean newthing = true;
 
+        for (int i = 0; i < listaElements.size(); i++) {  
 
-        for (int i = 0; i < listaElements.size(); i++) {
-            
                 if(listaElements.get(i).getThing().equals(coisa)){
 
                     listaElements.get(i).setCount( (listaElements.get(i).getCount()) + n);
@@ -23,8 +24,7 @@ public class ElementarMachine<T> {
                     break;
                 }
         }
-
-
+        
         if(newthing){
             Element<T> novo = new Element<T>(n, coisa);
             listaElements.add(novo);

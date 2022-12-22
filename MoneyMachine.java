@@ -1,3 +1,16 @@
-public class MoneyMachine {
+public class MoneyMachine extends ElementarMachine<Product>{
     
+    private float balance;
+
+
+    public float getTotalValue(){
+        
+        return this.balance;
+        
+    }
+
+
+    public void addMoney(int n, float money){
+
+    }
 }
