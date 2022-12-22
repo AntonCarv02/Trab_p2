@@ -1,13 +1,18 @@
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 public class test {
     public static void main(String[] args) {
-        int [] arr ={21,12,2022};
+        SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
         
-        Perishable food = new Perishable("sandes",3.99, arr);
-        Product chocolate = new NonPerishable("twix", 1, 0);
-
-        if(food.isFromToday()){
-            System.out.println("sim\n");
-            System.out.println(chocolate.getClass());
+        try {
+            
+            Date d1 = sdformat.parse("2022-12-13");
+            Perishable p1 = new Perishable("Fruit", 12, d1);
+            System.out.println(p1.isOutDated());
+        
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }
