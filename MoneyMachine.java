@@ -13,4 +13,8 @@ public class MoneyMachine extends ElementarMachine<Product>{
     public void addMoney(int n, float money){
 
     }
+
+
+    public void addThings(int n, float f) {
+    }
 }
