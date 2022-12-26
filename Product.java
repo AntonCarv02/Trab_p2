@@ -29,6 +29,9 @@ public abstract class Product {
     }
 
     
+    public String getSimpleName(){
+        return null;
+    }
 
 }
 

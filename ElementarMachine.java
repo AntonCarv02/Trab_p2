@@ -5,24 +5,46 @@ public class ElementarMachine<T> {
 
     private ArrayList<Element<T>> listaElements;
 
-
+    
+    
     public ElementarMachine() {
-        listaElements = new ArrayList<Element<T>>();
+        setListaElements(new ArrayList<Element<T>>());
     }
+
+
+
+    public ArrayList<Element<T>> getListaElements() {
+        return listaElements;
+    }
+
+
+    public void setListaElements(ArrayList<Element<T>> listaElements) {
+        this.listaElements = listaElements;
+    }
+
 
 
     public void addThings(int n, T coisa) {
 
         boolean newthing = true;
-
+        
         for (int i = 0; i < listaElements.size(); i++) {  
 
-                if(listaElements.get(i).getThing().equals(coisa)){
+            if((listaElements.get(i).getThing().getClass().equals(coisa.getClass())) && ((coisa.getClass().getSimpleName().contains("Perishable")))){
 
+                if(((Product) listaElements.get(i).getThing()).getName().equals(((Product) coisa).getName())){
+                    
                     listaElements.get(i).setCount( (listaElements.get(i).getCount()) + n);
                     newthing = false;
                     break;
                 }
+            }else if((listaElements.get(i).getThing().equals(coisa))){
+
+                  
+                listaElements.get(i).setCount( (listaElements.get(i).getCount()) + n);
+                newthing = false;
+                break;
+            } 
         }
         
         if(newthing){
@@ -47,15 +69,14 @@ public class ElementarMachine<T> {
                 }
                 return true;
             }
-
         }
-
         return false;
     }
 
+
     public void listAll() {
         for (int i = 0; i < listaElements.size(); i++) {
-            System.out.println(listaElements.get(i));
+            System.out.println(listaElements.get(i).toString());
         }
 
     }

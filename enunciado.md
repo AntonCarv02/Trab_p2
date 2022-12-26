@@ -133,7 +133,7 @@ As instâncias de classe `ElementarMachine<T>`  devem implementar os métodos:
 Existem dois (sub)tipos de máquinas: `ProductMachine` e `MoneyMachine`. A `ProductMachine` deve implementar os métodos:
 
 - `public void addProduct(int n, Product)`: adiciona `n` produtos
-- `public boolean hasProduct(Product)`
+- `protected boolean hasProduct(Product)`
 - `public void listAllOrdered( )`: lista todos os produtos por ordem crescente de custo
 
 A classe `MoneyMachine` deve implementar os métodos:

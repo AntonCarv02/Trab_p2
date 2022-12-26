@@ -1,20 +1,35 @@
-public class MoneyMachine extends ElementarMachine<Product>{
+
+public class MoneyMachine extends ElementarMachine<Float>{
     
-    private float balance;
+    
+    ElementarMachine<Float> listaMoney;
+
+    
+    public MoneyMachine(ElementarMachine<Float> listaMoney) {
+        this.listaMoney = listaMoney;
+    }
+
+    public ElementarMachine<Float> getListaMoney() {
+        return listaMoney;
+    }
+
+
+    public void setListaMoney(ElementarMachine<Float> listaMoney) {
+        this.listaMoney = listaMoney;
+    }
 
 
     public float getTotalValue(){
         
-        return this.balance;
-        
+        return 0;        
     }
 
 
     public void addMoney(int n, float money){
-
+        addThings(n, money);
     }
 
 
-    public void addThings(int n, float f) {
-    }
+    
+
 }
