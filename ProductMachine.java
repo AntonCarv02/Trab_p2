@@ -28,7 +28,7 @@ public class ProductMachine extends ElementarMachine<Product>{
 
 
     public boolean hasProduct(Product p) {
-        for (int i = 0; i < this.getListaElements().size(); i++) {
+        for (int i = 0; i < listaProd.getListaElements().size(); i++) {
 
             if (getListaElements().get(i).getThing().getName().equals(p.getName())) {
 
@@ -38,12 +38,14 @@ public class ProductMachine extends ElementarMachine<Product>{
         return false;
     }
 
-
+    ///no other way
     public void listAllOrdered() {
         
         listaProd.getListaElements().sort((element1, element2) -> Double.compare(element1.getThing().getCost() ,(element2.getThing().getCost())));
 
-        listaProd.listAll();
-
+        for (int i = 0; i < listaProd.getListaElements().size(); i++) {
+            System.out.println("Element ["+ listaProd.getListaElements().get(i).getThing().getClass().getSimpleName() + "=Product [name=" + 
+            listaProd.getListaElements().get(i).getThing().getName()+ ", cost=" +listaProd.getListaElements().get(i).getThing().getCost() + "], count = " + listaProd.getListaElements().get(i).getCount() + "]");
+        }
     }
 }

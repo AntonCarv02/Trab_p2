@@ -1,8 +1,35 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class test {
     public static void main(String[] args) {
-/* *
+
+        Perishable p2 = new Perishable("Bread", 12, new Date());
+        System.out.println(p2.isFromToday());
+
+
+        SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date d1 = sdformat.parse("2022-12-13");
+            Perishable p1 = new Perishable("Fruit", 12, d1);
+            System.out.println(p1.isOutDated());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        NonPerishable np = new NonPerishable("Lotion", 1.2, 1.3);
+        System.out.println(np.getVolume());
+
+        /*/
+        ElementarMachine<String> sm1 = new ElementarMachine<String>();
+        sm1.addThings(10, "foo");
+        sm1.addThings(10, "bar");
+        sm1.addThings(10, "foo");
+        sm1.removeOneThing("foo");
+        sm1.listAll();
+
+
+        /*
         try {
             ProductMachine pm = new ProductMachine();
             pm.addProduct(10, new Perishable("Milk", 10, new Date()));
@@ -41,7 +68,7 @@ public class test {
            * Element [Float=1.0, count = 10]
            * Ordered
            * 40.0
-           */
+           *
 
 
 
