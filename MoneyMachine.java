@@ -5,8 +5,8 @@ public class MoneyMachine extends ElementarMachine<Float>{
     ElementarMachine<Float> listaMoney;
 
     
-    public MoneyMachine(ElementarMachine<Float> listaMoney) {
-        this.listaMoney = listaMoney;
+    public MoneyMachine() {
+        setListaMoney(new ElementarMachine<Float>());
     }
 
     public ElementarMachine<Float> getListaMoney() {
@@ -20,8 +20,15 @@ public class MoneyMachine extends ElementarMachine<Float>{
 
 
     public float getTotalValue(){
-        
-        return 0;        
+        int amount=0;
+        float res=0, coin=0;
+
+        for (int i = 0; i < getListaElements().size(); i++) {
+            amount = getListaElements().get(i).getCount();
+            coin =  getListaElements().get(i).getThing();
+            res += (amount*coin);
+        }
+        return res;        
     }
 
 

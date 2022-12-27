@@ -2,7 +2,7 @@ import java.util.Date;
 
 public class test {
     public static void main(String[] args) {
-
+/* *
         try {
             ProductMachine pm = new ProductMachine();
             pm.addProduct(10, new Perishable("Milk", 10, new Date()));
@@ -41,7 +41,7 @@ public class test {
            * Element [Float=1.0, count = 10]
            * Ordered
            * 40.0
-           *
+           */
 
 
 
