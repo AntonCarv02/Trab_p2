@@ -3,7 +3,7 @@ import java.util.Date;
 
 public class test {
     public static void main(String[] args) {
-
+        /*
         Perishable p2 = new Perishable("Bread", 12, new Date());
         System.out.println(p2.isFromToday());
 
@@ -20,7 +20,7 @@ public class test {
         NonPerishable np = new NonPerishable("Lotion", 1.2, 1.3);
         System.out.println(np.getVolume());
 
-        /*/
+        /*
         ElementarMachine<String> sm1 = new ElementarMachine<String>();
         sm1.addThings(10, "foo");
         sm1.addThings(10, "bar");
@@ -68,7 +68,7 @@ public class test {
            * Element [Float=1.0, count = 10]
            * Ordered
            * 40.0
-           *
+           */
 
 
 
@@ -82,18 +82,26 @@ public class test {
             pm1.addProduct(5, new NonPerishable("Lotion", 2.55, 3.4));
 
             VendingMachine vm1 = new VendingMachine(pm1, mm1);
+        
 
+            //carregar VendingMachine p ficheiro
             VendingMachine.saveMachine(vm1, "file.dat");
+
 
             vm1.getMoneyMachine().addMoney(10, 2f);
 
             System.out.println("Money machine of vending machine 1: listaAll");
             vm1.getMoneyMachine().listAll();
 
+
+            //carregar VendingMachine do ficheiro para o programa
             VendingMachine vm2 = VendingMachine.restoreMachine("file.dat");
+
 
             System.out.println("Money machine of vending machine 1: listaAll");
             vm2.getMoneyMachine().listAll();
+
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
 

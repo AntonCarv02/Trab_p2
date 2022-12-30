@@ -32,7 +32,7 @@ public class ElementarMachine<T> {
         for (int i = 0; i < listaElements.size(); i++) {
 
             if ((listaElements.get(i).getThing().getClass().equals(coisa.getClass()))
-                    && ((coisa.getClass().getSimpleName().contains("Perishable")))) {
+                    && (coisa.getClass().getSimpleName().contains("Perishable"))) {
 
                 if (((Product) listaElements.get(i).getThing()).getName().equals(((Product) coisa).getName())) {
 

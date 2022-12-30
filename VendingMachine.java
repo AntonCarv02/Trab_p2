@@ -1,3 +1,7 @@
+import java.io.*;
+import java.util.ArrayList;
+
+
 public class VendingMachine {
     ProductMachine pm;
     MoneyMachine mm;
@@ -6,8 +10,8 @@ public class VendingMachine {
      * Construtor
      */
     public VendingMachine(ProductMachine pm, MoneyMachine mm) {
-        this.pm = pm;
-        this.mm = mm;
+        setProductMachine(pm);
+        setMoneyMachine(mm);
     }
 
 
@@ -39,16 +43,43 @@ public class VendingMachine {
      * 
      * 
      */
-    public static void saveMachine(VendingMachine vm, String ficheiro) {
+    public static void saveMachine(VendingMachine vm, String ficheiro) throws IOException {
 
-
+        
+        FileOutputStream outStream = new FileOutputStream( ficheiro );
+        ObjectOutputStream outputStream = new ObjectOutputStream( outStream );
+        
+        outputStream.writeObject(vm.getProductMachine().getListaElements());
+        outputStream.writeObject(vm.getMoneyMachine().getListaElements());
+        outStream.close();
     }
 
 
 
-    public static VendingMachine restoreMachine(String ficheiro) {
+    public static VendingMachine restoreMachine(String ficheiro) throws IOException, ClassNotFoundException {
+        
+        FileInputStream InStream = new FileInputStream( ficheiro );
+        ObjectInputStream InputStream = new ObjectInputStream( InStream );
 
-        return null;
+
+        ProductMachine pm= new ProductMachine();/*
+        ElementarMachine<Product> elm = new ElementarMachine<Product>();
+
+        elm.setListaElements((ArrayList<Element<Product>>) InputStream.readObject());
+        pm.setListaProd(elm);
+*/
+
+        MoneyMachine mm = new MoneyMachine();
+        ElementarMachine<Float> elm1 = new ElementarMachine<Float>();
+
+        elm1.setListaElements((ArrayList<Element<Float>>) InputStream.readObject());
+        mm.setListaMoney(elm1);
+        
+
+        VendingMachine vm = new VendingMachine(pm, mm);
+
+        InputStream.close();
+        return vm;
 
     }
 }

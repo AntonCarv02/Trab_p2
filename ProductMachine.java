@@ -1,7 +1,7 @@
 
 public class ProductMachine extends ElementarMachine<Product>{
 
-    ElementarMachine<Product> listaProd;
+    protected ElementarMachine<Product> listaProd;
 
     
     public ProductMachine() {
@@ -30,7 +30,7 @@ public class ProductMachine extends ElementarMachine<Product>{
     public boolean hasProduct(Product p) {
         for (int i = 0; i < listaProd.getListaElements().size(); i++) {
 
-            if (getListaElements().get(i).getThing().getName().equals(p.getName())) {
+            if (listaProd.getListaElements().get(i).getThing().getName().equals(p.getName())) {
 
                 return true;
             }
