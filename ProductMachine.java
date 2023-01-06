@@ -40,7 +40,7 @@ public class ProductMachine extends ElementarMachine<Product>{
 
     ///no other way
     public void listAllOrdered() {
-        
+        //ou aprendes ou ves outra maneira -- sort
         listaProd.getListaElements().sort((element1, element2) -> Double.compare(element1.getThing().getCost() ,(element2.getThing().getCost())));
 
         for (int i = 0; i < listaProd.getListaElements().size(); i++) {

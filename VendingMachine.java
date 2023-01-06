@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
 
 
 public class VendingMachine {
@@ -44,13 +43,31 @@ public class VendingMachine {
      * 
      */
     public static void saveMachine(VendingMachine vm, String ficheiro) throws IOException {
-
-        
-        FileOutputStream outStream = new FileOutputStream( ficheiro );
+        File f = new File(ficheiro);
+        FileOutputStream outStream = new FileOutputStream( f );
         ObjectOutputStream outputStream = new ObjectOutputStream( outStream );
         
-        outputStream.writeObject(vm.getProductMachine().getListaElements());
-        outputStream.writeObject(vm.getMoneyMachine().getListaElements());
+
+        outputStream.write(vm.getProductMachine().getListaElements().size());
+
+        for (int i = 0; i <vm.getProductMachine().getListaElements().size() ; i++) {
+            System.out.println((vm.getMoneyMachine().getListaElements().get(i).toString()));
+            outputStream.writeObject((vm.getProductMachine().getListaElements()));
+
+        }
+
+        
+
+        outputStream.writeInt(vm.getMoneyMachine().getListaElements().size());
+
+        //for (int i = 0; i <vm.getMoneyMachine().getListaElements().size() ; i++) {
+           /*
+           java.lang.NoSuchFieldException: serialPersistentFields"
+           */
+            outputStream.writeObject(vm.getMoneyMachine().getListaElements());
+
+        //}
+
         outStream.close();
     }
 
@@ -58,25 +75,38 @@ public class VendingMachine {
 
     public static VendingMachine restoreMachine(String ficheiro) throws IOException, ClassNotFoundException {
         
-        FileInputStream InStream = new FileInputStream( ficheiro );
+        File f = new File(ficheiro);
+        FileInputStream InStream = new FileInputStream( f );
         ObjectInputStream InputStream = new ObjectInputStream( InStream );
 
+        
+        ProductMachine prod= new ProductMachine();
+        
+        ElementarMachine<Product> elm = null;
+        
+        int prodsize = InputStream.readInt();
 
-        ProductMachine pm= new ProductMachine();/*
-        ElementarMachine<Product> elm = new ElementarMachine<Product>();
+        //fazer for para input de cada Element
+        for (int i = 0; i < prodsize; i++) {
+            elm = (ElementarMachine<Product>) InputStream.readObject();
+        
+        }
+        prod.setListaProd(elm);
 
-        elm.setListaElements((ArrayList<Element<Product>>) InputStream.readObject());
-        pm.setListaProd(elm);
-*/
 
-        MoneyMachine mm = new MoneyMachine();
+
+        MoneyMachine mon = new MoneyMachine();
         ElementarMachine<Float> elm1 = new ElementarMachine<Float>();
 
-        elm1.setListaElements((ArrayList<Element<Float>>) InputStream.readObject());
-        mm.setListaMoney(elm1);
+        int moneysize = InputStream.readInt();
+        for (int i = 0; i < moneysize; i++) {
+            elm1.getListaElements().add((Element<Float>) InputStream.readObject());
+        
+        }
+        mon.setListaMoney(elm1);
         
 
-        VendingMachine vm = new VendingMachine(pm, mm);
+        VendingMachine vm = new VendingMachine(prod, mon);
 
         InputStream.close();
         return vm;

@@ -29,7 +29,7 @@ public class test {
         sm1.listAll();
 
 
-        /*
+        *
         try {
             ProductMachine pm = new ProductMachine();
             pm.addProduct(10, new Perishable("Milk", 10, new Date()));
@@ -70,8 +70,7 @@ public class test {
            * 40.0
            */
 
-
-
+   
         try {
             MoneyMachine mm1 = new MoneyMachine();
             mm1.addMoney(10, 0.5f);
@@ -92,8 +91,7 @@ public class test {
 
             System.out.println("Money machine of vending machine 1: listaAll");
             vm1.getMoneyMachine().listAll();
-
-
+            
             //carregar VendingMachine do ficheiro para o programa
             VendingMachine vm2 = VendingMachine.restoreMachine("file.dat");
 
