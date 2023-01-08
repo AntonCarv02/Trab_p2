@@ -1,5 +1,5 @@
 
-public class MoneyMachine extends ElementarMachine<Float>{
+public class MoneyMachine extends ElementarMachine<Float> {
     
     
     ElementarMachine<Float> listaMoney;

@@ -1,5 +1,5 @@
 
-public class ProductMachine extends ElementarMachine<Product>{
+public class ProductMachine extends ElementarMachine<Product> {
 
     protected ElementarMachine<Product> listaProd;
 

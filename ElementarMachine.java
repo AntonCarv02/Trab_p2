@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class ElementarMachine<T> {
+public class ElementarMachine<T> implements Serializable{
 
     private ArrayList<Element<T>> listaElements;
 

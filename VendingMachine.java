@@ -1,7 +1,7 @@
 import java.io.*;
 
 
-public class VendingMachine {
+public class VendingMachine implements Serializable{
     ProductMachine pm;
     MoneyMachine mm;
 
@@ -17,7 +17,7 @@ public class VendingMachine {
     /*
      * getters e setters
      */
-    public ProductMachine getProductMachine() {
+    public ProductMachine getProductMachine() {// Este método retorna o 
         return pm;
     }
 
@@ -27,7 +27,7 @@ public class VendingMachine {
     }
 
 
-    public MoneyMachine getMoneyMachine() {
+    public MoneyMachine getMoneyMachine() {// Este método retorna o 
         return mm;
     }
 
@@ -57,18 +57,19 @@ public class VendingMachine {
         }
 
         
-
+        
         outputStream.writeInt(vm.getMoneyMachine().getListaElements().size());
 
         //for (int i = 0; i <vm.getMoneyMachine().getListaElements().size() ; i++) {
            /*
-           java.lang.NoSuchFieldException: serialPersistentFields"
+           java.lang.NoSuchFieldException: serialPersistentFields" / serialVersionUID"
            */
-            outputStream.writeObject(vm.getMoneyMachine().getListaElements());
+           outputStream.writeObject(vm.getMoneyMachine().getListaElements());
 
         //}
 
         outStream.close();
+        outputStream.close();
     }
 
 

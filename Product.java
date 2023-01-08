@@ -1,37 +1,38 @@
-public abstract class Product {
+import java.io.Serializable;
 
-    protected String name;
-    protected double cost;
+public abstract class Product implements Serializable{
+    protected String name; // Variável name: Guarda o nome do produto.
+    protected double cost; // Variável cost: Guarda o preço do produto.
         
-    
+    /*
+    * Construtor da classe abstrata Product.
+    * A classe é abstrata para não ser possível criar uma instância desta classe.
+    *
+    * Objetivo: Criar o produto.
+    * Tem como argumentos, o nome do produto e o respetivo custo.
+    */
     protected Product(String name, double cost) {
-        setName(name);
+        setName(name); 
         setCost(cost);
     }
-
-
-
-    public String getName() {
+    // Este método retorna o nome do produto.
+    public String getName() { 
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    // Este método insere na variável name, o nome do produto dado pelo utilizador.
+    public void setName(String name) { 
+        this.name = name; 
     }
 
-
-    public double getCost() {
+    // Este método retorna o custo do produto.
+    public double getCost() { 
         return cost;
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
+    // Este método insere na variável cost, o custo do produto dado pelo utilizador.
+    public void setCost(double cost) { 
+        this.cost = cost; 
     }
-
-    
-    public String getSimpleName(){
-        return null;
-    }
-
 }
 
