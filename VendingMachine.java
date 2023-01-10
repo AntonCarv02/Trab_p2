@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class VendingMachine implements Serializable {
     ProductMachine pm;
@@ -38,13 +39,15 @@ public class VendingMachine implements Serializable {
      */
     public static void saveMachine(VendingMachine vm, String ficheiro) throws IOException {
         
+        FileOutputStream foutStream = new FileOutputStream(ficheiro);
+        ObjectOutputStream outputStream = new ObjectOutputStream(foutStream);
 
-        try (FileOutputStream outStream = new FileOutputStream(ficheiro);
-                ObjectOutputStream outputStream = new ObjectOutputStream(outStream);) {
-           
-                outputStream.writeObject(vm.getMoneyMachine().getListaElements());
+        try  {
+            outputStream.writeObject(vm.getProductMachine().getListaElements());
+            outputStream.writeObject(vm.getMoneyMachine().getListaElements());
             outputStream.close();
-            outStream.close();
+            foutStream.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,9 +60,8 @@ public class VendingMachine implements Serializable {
     public static VendingMachine restoreMachine(String ficheiro) throws IOException, ClassNotFoundException {
 
         File f = new File(ficheiro);
-        FileReader instream = new FileReader(f);
-        BufferedReader InputStream = new BufferedReader(instream);
-
+        FileInputStream fis = new FileInputStream(f);
+        ObjectInputStream objStream = new ObjectInputStream(fis);
 
 
         ProductMachine prod = new ProductMachine();
@@ -67,12 +69,13 @@ public class VendingMachine implements Serializable {
         MoneyMachine mon = new MoneyMachine();
 
 
-        
+        prod.setListaElements((ArrayList<Element<Product>>) objStream.readObject());
+        mon.setListaElements((ArrayList<Element<Float>>) objStream.readObject());
 
         VendingMachine vm = new VendingMachine(prod, mon);
 
-        InputStream.close();
-        instream.close();
+        fis.close();
+        objStream.close();
         return vm;
 
     }

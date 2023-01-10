@@ -2,7 +2,7 @@ import java.util.Date;
 
 public class test3 {
     public static void main(String[] args) {
-
+/* 
         try {
             ProductMachine pm = new ProductMachine();
             pm.addProduct(10, new Perishable("Milk", 10, new Date()));
@@ -18,7 +18,7 @@ public class test3 {
            * Element [NonPerishable=Product [name=Game, cost=7.5], count = 5]
            * Element [Perishable=Product [name=Milk, cost=10.0], count = 20]
            * Element [NonPerishable=Product [name=Lotion, cost=12.5], count = 5]
-           */
+           *
 
         try {
             MoneyMachine mm = new MoneyMachine();
