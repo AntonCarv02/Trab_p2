@@ -42,7 +42,7 @@ public class VendingMachine implements Serializable {
         try (FileOutputStream outStream = new FileOutputStream(ficheiro);
                 ObjectOutputStream outputStream = new ObjectOutputStream(outStream);) {
            
-
+                outputStream.writeObject(vm.getMoneyMachine().getListaElements());
             outputStream.close();
             outStream.close();
         } catch (IOException e) {
@@ -76,4 +76,16 @@ public class VendingMachine implements Serializable {
         return vm;
 
     }
+
+
+
+    public void buy(String prod){
+    for (int i = 0; i < pm.getListaElements().size(); i++) {
+        
+        if(pm.getListaElements().get(i).getThing().getName().equalsIgnoreCase(prod)){
+            boolean removed = (pm.removeOneThing(pm.getListaElements().get(i).getThing()));
+        }
+    
+    }
+}
 }

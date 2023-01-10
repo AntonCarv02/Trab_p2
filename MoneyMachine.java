@@ -2,7 +2,7 @@
 public class MoneyMachine extends ElementarMachine<Float> {
     
     
-    ElementarMachine<Float> listaMoney;
+    private ElementarMachine<Float> listaMoney;
 
     
     public MoneyMachine() {

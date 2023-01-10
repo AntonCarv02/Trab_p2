@@ -1,7 +1,7 @@
 
 public class ProductMachine extends ElementarMachine<Product> {
 
-    protected ElementarMachine<Product> listaProd;
+    private ElementarMachine<Product> listaProd;
 
     
     public ProductMachine() {
@@ -44,7 +44,7 @@ public class ProductMachine extends ElementarMachine<Product> {
         listaProd.getListaElements().sort((element1, element2) -> Double.compare(element1.getThing().getCost() ,(element2.getThing().getCost())));
 
         for (int i = 0; i < listaProd.getListaElements().size(); i++) {
-            System.out.println("Element ["+ listaProd.getListaElements().get(i).getThing().getClass().getSimpleName() + "=Product [name=" + 
+            System.out.println("Element ["+ listaProd.getListaElements().get(i).getThing().getClass().getSimpleName() + " = Product [name=" + 
             listaProd.getListaElements().get(i).getThing().getName()+ ", cost=" +listaProd.getListaElements().get(i).getThing().getCost() + "], count = " + listaProd.getListaElements().get(i).getCount() + "]");
         }
     }

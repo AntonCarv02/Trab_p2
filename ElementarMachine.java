@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ElementarMachine<T> implements Serializable{
 
-    private ArrayList<Element<T>> listaElements;
+    protected ArrayList<Element<T>> listaElements;
 
 
     public ElementarMachine() {
@@ -24,7 +24,7 @@ public class ElementarMachine<T> implements Serializable{
 
 /*
  * 
- * falta função para set count
+ * 
  */
     public void addThings(int n, T coisa) {
 
