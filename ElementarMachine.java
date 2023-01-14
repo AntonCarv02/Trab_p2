@@ -39,23 +39,13 @@ public class ElementarMachine<T> {
             // Com o método .get(), retiramos o element i da lista. Com o uso do método .getThing() retiramos o parâmetro 'coisa' que corresponde ao produto/tipo de moeda.
             // Com os métodos .getClass().getSimpleName() vai retornar a classe do elemento,
             // Queremos ver se a classe do elemento é igual à classe da coisa, para verificar se o elemento já existe ou não.
-            if ((this.getListaElements().get(i).getThing().getClass().equals(coisa.getClass()))
-                    && (coisa.getClass().getSimpleName().contains("Perishable"))) { // Verifica se o nome da classe da coisa contém Perishable no nome.
-                
-                // Faz referência à classe Product. Retirar o nome do produto com o método .getName() para verificar se têm o mesmo nome da coisa.
-                if (((Product) this.getListaElements().get(i).getThing()).getName().equals(((Product) coisa).getName())) {
-
-                    this.getListaElements().get(i).setCount((this.getListaElements().get(i).getCount()) + n); // Aumenta a quantidade do elemento.
-                    newThing = false; // Como não é nova coisa, a variável newThing fica falso.
-                    break;
-                }
-
-            } else if ((this.getListaElements().get(i).getThing().equals(coisa))) { // Caso não seja um produto e se for igual â coisa.
+            if ((this.getListaElements().get(i).getThing().equals(coisa))) { // Caso não seja um produto e se for igual â coisa.
 
                 this.getListaElements().get(i).setCount((this.getListaElements().get(i).getCount()) + n); // Aumenta a quantidade do elemento.
                 newThing = false; // Como não é nova coisa, a variável newThing fica falso.
                 break;
             }
+            
         }
         // Se após percorrer a lista, e a variável newThing permanecer a true, significa que a coisa é nova.
         if (newThing) {
@@ -73,32 +63,23 @@ public class ElementarMachine<T> {
 
         for (int i = 0; i < this.getListaElements().size(); i++) {
             // Se o elemento i da lista, o nome da classe contém Perishable no nome, é um produto. Se o nome do produto é igual ao nome da coisa que queremos
-            // remover então entra no if.
-            if ((this.getListaElements().get(i).getThing().getClass().getSimpleName().contains("Perishable"))
-                    &&((Product) this.getListaElements().get(i).getThing()).getName().equals(coisa)){
-                    
-                if ((this.getListaElements().get(i).getCount()) < 2) { // Se a quantidade do produto na máquina for apenas 1,
-                    this.getListaElements().remove(i);  // Então remove-se o elemento da lista.
-                } else { // Se a quantidade for maior ou igual a 2.
-
-                    this.getListaElements().get(i).setCount((this.getListaElements().get(i).getCount()) - 1); // Retira-se, subtraindo a quantidade por -1.
-                }
-                return true; // Retorna true após remover a coisa.
-
-            } else if (this.getListaElements().get(i).getThing().equals(coisa)) { // Se a coisa do elemento for igual â coisa que queremos remover.
+            // remover então entra no if               
+            if (this.getListaElements().get(i).getThing().equals(coisa)) { // Se a coisa do elemento for igual â coisa que queremos remover.
 
                 if ((this.getListaElements().get(i).getCount()) < 2) { 
 
                     this.getListaElements().remove(i);
-                } else {
 
+                } else {
                     this.getListaElements().get(i).setCount((this.getListaElements().get(i).getCount()) - 1);
                 }
+
                 return true;
             }
         }
         return false; // Retorna falso se não foi possível remover a coisa. 
     }
+
 
     /*
     * Este método serve para dar print de todos os elementos da lista.

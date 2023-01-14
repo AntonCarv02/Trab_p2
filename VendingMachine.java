@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
+import java.util.*;
 
 public class VendingMachine implements Serializable {
     ProductMachine pm;
@@ -38,22 +38,22 @@ public class VendingMachine implements Serializable {
      */
     public static void saveMachine(VendingMachine vm, String ficheiro) throws IOException {
 
-        FileOutputStream foutStream = new FileOutputStream(ficheiro);
-        ObjectOutputStream outputStream = new ObjectOutputStream(foutStream); // tas ai?
+        FileOutputStream foutStream = new FileOutputStream(ficheiro); // permite escrever dados binarios para um ficheiro.
+        ObjectOutputStream outputStream = new ObjectOutputStream(foutStream); // Permite escrever no ficheiro um arraylist
 
         try {
             outputStream.writeObject(vm.getProductMachine().getListaElements());
             outputStream.writeObject(vm.getMoneyMachine().getListaElements());
             outputStream.close();
             foutStream.close();
-
-            // System.out.println("here");
+            
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
     }
 
+    @SuppressWarnings("unchecked")
     public static VendingMachine restoreMachine(String ficheiro) throws IOException, ClassNotFoundException {
 
         File f = new File(ficheiro);
@@ -61,8 +61,8 @@ public class VendingMachine implements Serializable {
         ObjectInputStream objStream = new ObjectInputStream(fis);
 
         ProductMachine prod = new ProductMachine();
-
         MoneyMachine mon = new MoneyMachine();
+
 
         prod.setListaElements((ArrayList<Element<Product>>) objStream.readObject());
         mon.setListaElements((ArrayList<Element<Float>>) objStream.readObject());
@@ -75,27 +75,72 @@ public class VendingMachine implements Serializable {
 
     }
 
-    public boolean buy(String prod, MoneyMachine carteira) {
 
-        float totalCarteira = carteira.getTotalValue();
+
+    public static float buy(VendingMachine vm, String prod, float totalvalue) throws Exception{
+
+        float totalCarteira = totalvalue;
         double custo = 0;
+        float troco=0;
 
-        for (int i = 0; i < this.getProductMachine().getListaElements().size(); i++) {
-            if (this.getProductMachine().getListaElements().get(i).getThing().getName().equalsIgnoreCase(prod)) {
+        
+
+        for (int i = 0; i < vm.getProductMachine().getListaElements().size(); i++) {
+            if (vm.getProductMachine().getListaElements().get(i).getThing().getName().equalsIgnoreCase(prod)) {
                 
-                custo = this.getProductMachine().getListaElements().get(i).getThing().getCost();
+                custo = vm.getProductMachine().getListaElements().get(i).getThing().getCost();
                 
                 if (custo > totalCarteira) {
-                    System.out.println("valor insuficiente");
-                    return false;
-                
+                    
+                    throw new Exception("valor insuficiente");
                 } else {
 
-                    
-                    return this.getProductMachine().removeOneThing(this.getProductMachine().getListaElements().get(i).getThing());
+                    troco = (float) (totalCarteira-custo);
+                    vm.getProductMachine().removeOneThing(vm.getProductMachine().getListaElements().get(i).getThing());
+                    return troco;
                 }
             }
         }
-        return false;
+        throw new Exception("Produto não existe");
+    }
+
+
+
+    public MoneyMachine calcTroco(float troco) {
+
+        final float Limite = 0.00001f;
+        MoneyMachine carteiraTroco = new MoneyMachine();
+
+        int i = 0;
+        
+        this.getMoneyMachine().getListaElements().sort((element1, element2) -> Double.compare(element1.getThing() ,(element2.getThing())));
+
+
+        while ( i < this.getMoneyMachine().getListaElements().size()) {
+            
+            
+            if (Math.abs(troco - this.getMoneyMachine().getListaElements().get(i).getThing())< Limite){
+
+                carteiraTroco.addMoney(1, this.getMoneyMachine().getListaElements().get(i).getThing());
+                
+                troco %=(this.getMoneyMachine().getListaElements().get(i).getThing());
+                this.getMoneyMachine().removeOneThing(this.getMoneyMachine().getListaElements().get(i).getThing());
+                    
+                break;
+
+            }else if(((troco/this.getMoneyMachine().getListaElements().get(i).getThing())<1)&&(i>0)){
+
+                carteiraTroco.addMoney(1, this.getMoneyMachine().getListaElements().get(i-1).getThing());
+                
+                troco %=(this.getMoneyMachine().getListaElements().get(i-1).getThing());
+                this.getMoneyMachine().removeOneThing(this.getMoneyMachine().getListaElements().get(i-1).getThing());
+                
+                i=0;
+
+            }
+            i++;
+
+        }
+        return carteiraTroco;
     }
 }

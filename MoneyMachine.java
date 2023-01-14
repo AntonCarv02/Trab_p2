@@ -22,4 +22,20 @@ public class MoneyMachine extends ElementarMachine<Float> {
     public void addMoney(int n, float money) {
         this.addThings(n, money);
     }
+    
+
+    public static boolean verifyInput(MoneyMachine cart, float coin) {
+        float[] moedas = { 0.1f, 0.2f, 0.5f, 1f, 2f, 5f, 10f, 20f };
+
+        for (int i = 0; i < moedas.length; i++) {
+            if (coin == moedas[i]) {
+                cart.addMoney(1, coin);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    
 }

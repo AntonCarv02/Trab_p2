@@ -14,23 +14,56 @@ public class Final {
         pm.listAllOrdered();
 
         Scanner s = new Scanner(System.in);
-        
         String in = new String();
+        float coin = 0;
+
+
 
         
         System.out.println("Insira o seu dinheiro (Formato: 0.5), \nquando não quiser inserir mais dinheiro escreva '-' : ");
-        do {
-            
-            in = s.nextLine();
-            float coin = Float.parseFloat(in);
-            
-        } while (in.equals("-"));
-
-
-        MoneyMachine mm = wallet;
-        VendingMachine vm = new VendingMachine(pm, mm);
-
+        do {   
+        
+        coin = s.nextFloat();
+        
+        }while(MoneyMachine.verifyInput(wallet,coin));
+        
         wallet.listAll();
+
+
+
+        System.out.println("Nome do produto:");
+        in = s.next();
         s.close();
+
+
+
+        MoneyMachine mm = new MoneyMachine();
+        for (int i = 0; i < wallet.getListaElements().size(); i++) {
+            mm.addMoney(wallet.getListaElements().get(i).getCount(), wallet.getListaElements().get(i).getThing());
+        }
+        mm.addMoney(10, 0.1f);
+        mm.addMoney(10, 0.5f);
+        mm.addMoney(10, 1.0f);
+        
+        VendingMachine vm = new VendingMachine(pm, mm);
+        
+
+
+        try {
+            float troco = VendingMachine.buy(vm, in, wallet.getTotalValue());
+
+            wallet = vm.calcTroco(troco);
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+
+        
+        System.out.println("\nTroco");
+        wallet.listAll();
+
+        System.out.println("\n");
+        pm.listAllOrdered();
     }
 }

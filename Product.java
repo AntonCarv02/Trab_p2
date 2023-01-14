@@ -34,5 +34,17 @@ public abstract class Product implements Serializable{
     public void setCost(double cost) { 
         this.cost = cost; 
     }
+
+
+    @Override
+    public boolean equals(Object obj){
+        if(this.getName() == ((Product) obj).getName()){
+            return true;
+        }
+        return false;
+    }
+
+    
+
 }
 

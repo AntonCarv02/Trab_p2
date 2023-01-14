@@ -48,8 +48,8 @@ public class test3 {
             mm1.addMoney(10, 0.1f);
             System.out.println(mm1.getTotalValue());
             ProductMachine pm1 = new ProductMachine();
-            pm1.addProduct(5, new NonPerishable("Lotion", 2.55, 3.4));
-
+            pm1.addProduct(1, new NonPerishable("Lotion", 2.55, 3.4));
+            pm1.removeOneThing(new NonPerishable("Lotion",2.55,3.4));
             VendingMachine vm1 = new VendingMachine(pm1, mm1);
 
             VendingMachine.saveMachine(vm1, "file.dat");
@@ -63,7 +63,7 @@ public class test3 {
 
             System.out.println("Money machine of vending machine 1: listaAll");
             vm2.getMoneyMachine().listAll();
-           
+            vm2.getProductMachine().listAllOrdered();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
