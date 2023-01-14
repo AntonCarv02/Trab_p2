@@ -108,7 +108,7 @@ public class VendingMachine implements Serializable {
 
     public MoneyMachine calcTroco(float troco) {
 
-        final float Limite = 0.00001f;
+        final float Limite = 0.000001f;
         MoneyMachine carteiraTroco = new MoneyMachine();
 
         int i = 0;
@@ -122,8 +122,7 @@ public class VendingMachine implements Serializable {
             if (Math.abs(troco - this.getMoneyMachine().getListaElements().get(i).getThing())< Limite){
 
                 carteiraTroco.addMoney(1, this.getMoneyMachine().getListaElements().get(i).getThing());
-                
-                troco %=(this.getMoneyMachine().getListaElements().get(i).getThing());
+
                 this.getMoneyMachine().removeOneThing(this.getMoneyMachine().getListaElements().get(i).getThing());
                     
                 break;
