@@ -34,7 +34,7 @@ public class Perishable extends Product implements Freshness {
     }
 
     /* Implementa o método definido na interface 'Freshness' que 
-    * verifica se o produto acaba hoje - ????
+    * verifica se o produto acaba hoje
     */
     @Override
     public boolean isFromToday() {

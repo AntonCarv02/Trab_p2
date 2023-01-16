@@ -15,18 +15,27 @@ public class Final {
 
         Scanner s = new Scanner(System.in);
         String in = new String();
-        float coin = 0;
+        boolean verif = true;
+
+
+        do{
+            try {
+
+                System.out.println("Insira o seu dinheiro (Formato: 0.5), \nou 's' quando não quiser inserir mais dinheiro: ");
+                in = s.nextLine();
+                verif = MoneyMachine.verifyInput(wallet,in);
+
+            } catch (Exception e) {
+
+                System.out.println(e.getMessage());
+            
+            }
+        }while(verif);
+        
 
 
 
-        
-        System.out.println("Insira o seu dinheiro (Formato: 0.5), \nquando não quiser inserir mais dinheiro escreva '-' : ");
-        do {   
-        
-        coin = s.nextFloat();
-        
-        }while(MoneyMachine.verifyInput(wallet,coin));
-        
+
         wallet.listAll();
 
 
@@ -48,9 +57,9 @@ public class Final {
         VendingMachine vm = new VendingMachine(pm, mm);
         
 
-
+        float troco = 0;
         try {
-            float troco = VendingMachine.buy(vm, in, wallet.getTotalValue());
+            troco = VendingMachine.buy(vm, in, wallet.getTotalValue());
 
             wallet = vm.calcTroco(troco);
 
@@ -60,10 +69,13 @@ public class Final {
         }
 
         
-        System.out.println("\nTroco");
+        System.out.println("\nTroco " + troco);
         wallet.listAll();
 
         System.out.println("\n");
         pm.listAllOrdered();
+
+        System.out.println("\n");
+        mm.listAll();
     }
 }

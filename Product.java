@@ -35,16 +35,14 @@ public abstract class Product implements Serializable{
         this.cost = cost; 
     }
 
-
+    //override do metodo equals para quando precisarmos de comparar product para que seja o nome que é comparado
     @Override
     public boolean equals(Object obj){
-        if(this.getName() == ((Product) obj).getName()){
+        if(this.getName().equals(((Product) obj).getName())){
             return true;
         }
         return false;
     }
-
-    
 
 }
 
